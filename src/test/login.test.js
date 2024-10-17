@@ -1,5 +1,5 @@
 import { login } from '../js/api/auth/login.js';
-import { save } from '../js/storage/index.js'; // Import load function if used in headers
+import { save } from '../js/storage/index.js';
 
 // Mock the fetch function to simulate API response
 global.fetch = jest.fn(() =>
@@ -13,7 +13,7 @@ global.fetch = jest.fn(() =>
   }),
 );
 
-// Mock the save and load functions from /storage/index
+// Mock the save and load functions from our storage module
 jest.mock('../js/storage/save.js', () => ({
   save: jest.fn(),
 }));

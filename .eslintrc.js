@@ -2,11 +2,24 @@ module.exports = {
   env: {
     browser: true,
     es2021: true,
+    node: true,
   },
-  extends: ["eslint:recommended", "plugin:prettier/recommended"],
+  extends: ['eslint:recommended', 'plugin:prettier/recommended'],
+  overrides: [
+    {
+      files: ['**/*.cy.js'],
+      env: { 'cypress/globals': true },
+      plugins: ['cypress'],
+      extends: ['plugin:cypress/recommended'],
+      rules: {
+        'cypress/no-unnecessary-waiting': 'off',
+        'no-unused-vars': 'off',
+      },
+    },
+  ],
   parserOptions: {
-    ecmaVersion: 12,
-    sourceType: "module",
+    ecmaVersion: 'latest',
+    sourceType: 'module',
   },
   rules: {},
 };

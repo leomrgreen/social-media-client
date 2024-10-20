@@ -3,7 +3,7 @@ const password = 'fakeuser2002';
 const method = 'POST';
 const API_URL = 'https://nf-api.onrender.com/api/v1/social/auth/login';
 
-describe('Login Function Test', () => {
+describe('Login test', () => {
   it('should login successfully with correct credentials', () => {
     cy.visit('/index.html');
 

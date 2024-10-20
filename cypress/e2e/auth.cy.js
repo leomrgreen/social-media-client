@@ -3,8 +3,9 @@ const password = 'fakeuser2002';
 const method = 'POST';
 const API_URL = 'https://nf-api.onrender.com/api/v1/social/auth/login';
 
-describe('Login test', () => {
-  it('should login successfully with correct credentials', () => {
+describe('Login & Logout test', () => {
+  beforeEach(() => {
+    // Visit the login page
     cy.visit('/index.html');
 
     // Fill out the login form using IDs
@@ -19,5 +20,27 @@ describe('Login test', () => {
 
     // Wait for the login request to complete
     cy.wait('@login').its('response.statusCode').should('eq', 200);
+  });
+
+  it('should store token in local storage after login', () => {
+    // Check if token is stored in localStorage
+    cy.window().then((win) => {
+      expect(win.localStorage.getItem('token')).to.exist;
+    });
+  });
+
+  it('should logout and remove the stored token from local storage', () => {
+    // Check if token is stored in localStorage
+    cy.window().then((win) => {
+      expect(win.localStorage.getItem('token')).to.exist;
+    });
+
+    // Click on the logout button to logout
+    cy.get('button[data-auth="logout"]').click({ force: true });
+
+    // Check if token is properly removed from LocalStorage
+    cy.window().then((win) => {
+      expect(win.localStorage.getItem('token')).to.be.null;
+    });
   });
 });

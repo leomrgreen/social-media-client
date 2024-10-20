@@ -2,7 +2,6 @@ module.exports = {
   env: {
     browser: true,
     es2021: true,
-    node: true,
   },
   extends: ['eslint:recommended', 'plugin:prettier/recommended'],
   overrides: [
@@ -15,6 +14,13 @@ module.exports = {
         'cypress/no-unnecessary-waiting': 'off',
         'no-unused-vars': 'off',
       },
+    },
+    {
+      files: ['**/*.test.js'],
+      env: { jest: true },
+      plugins: ['jest'],
+      extends: ['plugin:jest/recommended'],
+      rules: { 'jest/prefer-expect-assertions': 'off' },
     },
   ],
   parserOptions: {
